@@ -11,10 +11,16 @@
     <body>
         <script type="text/javascript">
             // Width and height
-            var w = 780;
-            var h = 100;
+            var w = 250;
+            var h = 500;
+            var P = new Array(501);
+            for (var i = 0; i < P.length; ++i) { P[i] = [i,false]; }
+            P[2] = [2,true];
+            P[3] = [3,true];
+            P[5] = [5,true];
+            P[7] = [7,true];
             var primes = [
-            				2,3,5,7,11,13,17,19,23,29,31,37,41,43,47
+            				2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,499
             			];
             // Create an SVG element
             var svg = d3.select("body")
@@ -22,30 +28,34 @@
             			.attr("width",w)
             			.attr("height",h);
             			
-            svg.selectAll("circle")
-            	.data(primes)
+            svg.selectAll("line")
+            	.data(P)
             	.enter()
-            	.append("circle")
-            	.attr("cx",function(d) {
-            		return d*15;
+            	.append("line")
+            	.attr("x1", 50)
+            	.attr("y1", function(d) {
+            		return d[0];
             	})
-            	.attr("cy", 80)
-            	.attr("r",8);
+            	.attr("x2", 200)
+            	.attr("y2", function(d) {
+            		return d[0];
+            	})
+            	.attr("stroke", "gray");
             
             svg.selectAll("text")
-			   .data(primes)
+			   .data(P)
 			   .enter()
 			   .append("text")
 			   .text(function(d) {
-			   		return d;
+			   		return d[0];
 			   })
-			   .attr("x", function(d) {
-			   		return d*15 - 5;
+			   .attr("x", 30)
+			   .attr("y", function(d) {
+			   		return d[0];
 			   })
-			   .attr("y", 84)
 			   .attr("font-family", "sans-serif")
 			   .attr("font-size", "11px")
-			   .attr("fill", "white");
+			   .attr("fill", "gray");
         </script>
     </body>
 </html>
