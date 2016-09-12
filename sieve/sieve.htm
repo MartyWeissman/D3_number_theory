@@ -30,10 +30,17 @@
            		onclick="updateData(5)" 
     		/>
 		</div>
+		<div id="option7">
+    		<input name="updateButton" 
+    			type="button" 
+           		value="Sieve 7s" 
+           		onclick="updateData(7)" 
+    		/>
+		</div>
         <script type="text/javascript">
             // Width and height
             var w = 250;
-            var h = 1000;
+            var h = 500;
             var P = new Array(501);
             for (var i = 0; i < P.length; ++i) { P[i] = [i,true]; }
             P[0] = false;
@@ -53,11 +60,11 @@
             	.append("line")
             	.attr("x1", 50)
             	.attr("y1", function(d) {
-            		return d[0]*2;
+            		return d[0];
             	})
             	.attr("x2", 200)
             	.attr("y2", function(d) {
-            		return d[0]*2;
+            		return d[0];
             	})
             	.attr("stroke", function(d) {
 			   		if (d[1]) {
@@ -93,7 +100,7 @@
 				}
 				svg.selectAll("line")
             		.data(P)
-            		.attr("stroke", function(d) {
+					.attr("stroke", function(d) {
 			   		if (d[1]) {
 			   			return "gray";}
 			   		else {
