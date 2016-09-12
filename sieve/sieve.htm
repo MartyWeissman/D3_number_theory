@@ -9,16 +9,35 @@
         </style>
     </head>
     <body>
+    	<div id="option2">
+    		<input name="updateButton" 
+    			type="button" 
+           		value="Sieve 2s" 
+           		onclick="updateData(2)" 
+    		/>
+		</div>
+		<div id="option3">
+    		<input name="updateButton" 
+    			type="button" 
+           		value="Sieve 3s" 
+           		onclick="updateData(3)" 
+    		/>
+		</div>
+		<div id="option5">
+    		<input name="updateButton" 
+    			type="button" 
+           		value="Sieve 5s" 
+           		onclick="updateData(5)" 
+    		/>
+		</div>
         <script type="text/javascript">
             // Width and height
             var w = 250;
-            var h = 500;
+            var h = 1000;
             var P = new Array(501);
-            for (var i = 0; i < P.length; ++i) { P[i] = [i,false]; }
-            P[2] = [2,true];
-            P[3] = [3,true];
-            P[5] = [5,true];
-            P[7] = [7,true];
+            for (var i = 0; i < P.length; ++i) { P[i] = [i,true]; }
+            P[0] = false;
+            P[1] = false;
             var primes = [
             				2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,499
             			];
@@ -34,13 +53,19 @@
             	.append("line")
             	.attr("x1", 50)
             	.attr("y1", function(d) {
-            		return d[0];
+            		return d[0]*2;
             	})
             	.attr("x2", 200)
             	.attr("y2", function(d) {
-            		return d[0];
+            		return d[0]*2;
             	})
-            	.attr("stroke", "gray");
+            	.attr("stroke", function(d) {
+			   		if (d[1]) {
+			   			return "gray";}
+			   		else {
+			   			return "white";}
+			   		}
+			   		);
             
             svg.selectAll("text")
 			   .data(P)
@@ -51,11 +76,31 @@
 			   })
 			   .attr("x", 30)
 			   .attr("y", function(d) {
-			   		return d[0];
+			   		return d[0]*2;
 			   })
 			   .attr("font-family", "sans-serif")
 			   .attr("font-size", "11px")
-			   .attr("fill", "gray");
+			   .attr("fill", function(d) {
+			   		if (d[1]) {
+			   			return "gray";}
+			   		else {
+			   			return "white";}
+			   		}
+			   		);
+			function updateData(m) {
+				for (var i = m; m*i < P.length; ++i) {
+					P[m*i] = [m*i, false];
+				}
+				svg.selectAll("line")
+            		.data(P)
+            		.attr("stroke", function(d) {
+			   		if (d[1]) {
+			   			return "gray";}
+			   		else {
+			   			return "white";}
+			   		}
+			   		);
+			}
         </script>
     </body>
 </html>
