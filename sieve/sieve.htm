@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Sieve of Eratosthenes</title>
+        <script type="text/javascript" src="d3js/d3.js"></script>
+        <style type="text/css">
+        	/* No style rules here yet */
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+            // Width and height
+            var w = 780;
+            var h = 100;
+            var primes = [
+            				2,3,5,7,11,13,17,19,23,29,31,37,41,43,47
+            			];
+            // Create an SVG element
+            var svg = d3.select("body")
+            			.append("svg")
+            			.attr("width",w)
+            			.attr("height",h);
+            			
+            svg.selectAll("circle")
+            	.data(primes)
+            	.enter()
+            	.append("circle")
+            	.attr("cx",function(d) {
+            		return d*15;
+            	})
+            	.attr("cy", 80)
+            	.attr("r",8);
+            
+            svg.selectAll("text")
+			   .data(primes)
+			   .enter()
+			   .append("text")
+			   .text(function(d) {
+			   		return d;
+			   })
+			   .attr("x", function(d) {
+			   		return d*15 - 5;
+			   })
+			   .attr("y", 84)
+			   .attr("font-family", "sans-serif")
+			   .attr("font-size", "11px")
+			   .attr("fill", "white");
+        </script>
+    </body>
+</html>
